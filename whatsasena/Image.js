@@ -11,7 +11,7 @@ const Base = require('./Base');
 const Message = require('./Message');
 const ReplyMessage = require('./ReplyMessage');
 
-class Video extends Base {
+class Image extends Base {
     constructor(client, data) {
         super(client);
         if (data) this._patch(data);
@@ -21,17 +21,17 @@ class Video extends Base {
         this.id = data.key.id === undefined ? undefined : data.key.id;
         this.jid = data.key.remoteJid;
         this.fromMe = data.key.fromMe;
-        this.caption = data.message.videoMessage.caption === null ? data.message.videoMessage.caption : '';
-        this.url = data.message.videoMessage.url;
+        this.caption = data.message.imageMessage.caption === null ? data.message.imageMessage.caption : '';
+        this.url = data.message.imageMessage.url;
         this.timestamp = typeof(data.messageTimestamp) === 'object' ? data.messageTimestamp.low : data.messageTimestamp;
-        this.mimetype = data.message.videoMessage.mimetype;
-        this.height = data.message.videoMessage.height;
-        this.width = data.message.videoMessage.width;
-        this.mediaKey = data.message.videoMessage.mediaKey;
+        this.mimetype = data.message.imageMessage.mimetype;
+        this.height = data.message.imageMessage.height;
+        this.width = data.message.imageMessage.width;
+        this.mediaKey = data.message.imageMessage.mediaKey;
         this.data = data;
         
-        if (data.message.videoMessage.hasOwnProperty('contextInfo') && data.message.contextInfo.quotedMessage) { 
-            this.reply_message = new ReplyMessage(this.client, data.message.videoMessage.contextInfo); }
+        if (data.message.imageMessage.hasOwnProperty('contextInfo') && data.message.contextInfo.quotedMessage) { 
+            this.reply_message = new ReplyMessage(this.client, data.message.imageMessage.contextInfo); }
         else {
             this.reply_message = false;
         }
@@ -66,4 +66,4 @@ class Video extends Base {
     }
 };
 
-module.exports = Video;
+module.exports = Image;
